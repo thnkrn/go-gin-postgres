@@ -17,7 +17,30 @@ func (db *DBController) GetCampaigns(c *gin.Context) {
 	var campaigns []models.Campaigns
 	db.Database.Find(&campaigns)
 
-	c.JSON(http.StatusOK, gin.H{"message": &campaigns})
+	c.JSON(http.StatusOK, &campaigns)
+}
+
+func (db *DBController) GetCampaign(c *gin.Context) {
+	paramsId := c.Param("id")
+	id, err := strconv.Atoi(paramsId)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "cannot parse id",
+		})
+		return
+	}
+
+	var campaign models.Campaigns
+
+	db.Database.Find(&campaign, id)
+
+	if int(campaign.ID) == id {
+		c.JSON(http.StatusOK, &campaign)
+		return
+	}
+
+	c.JSON(http.StatusNotFound, gin.H{"error": "Campaign not found"})
 }
 
 func (db *DBController) BookCampaign(c *gin.Context) {
