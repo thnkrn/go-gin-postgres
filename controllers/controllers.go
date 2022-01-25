@@ -86,3 +86,54 @@ func (db *DBController) DeleteCampaign(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Campaign is deleted successfully"})
 }
+
+func (db *DBController) UpdateCampaign(c *gin.Context) {
+	type request struct {
+		CampaignName *string `json:"campaignName"`
+		Date         *string `json:"date"`
+	}
+
+	paramsId := c.Param("id")
+	id, err := strconv.Atoi(paramsId)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "cannot parse id",
+		})
+		return
+	}
+
+	if isValid := db.Database.First(&models.Campaigns{}, id); isValid.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Campaign is not booking yet",
+		})
+		return
+	}
+
+	campaign := new(models.Campaigns)
+	db.Database.First(&campaign, id)
+
+	if err := c.BindJSON(&campaign); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
+	}
+
+	var body request
+
+	if body.CampaignName != nil {
+		campaign.CampaignName = *body.CampaignName
+	}
+
+	if body.Date != nil {
+		campaign.Date = *body.Date
+	}
+
+	if result := db.Database.Save(&campaign); result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, &campaign)
+}

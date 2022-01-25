@@ -13,4 +13,5 @@ func SetCollectionRoutes(router *gin.RouterGroup, db *gorm.DB) {
 	router.GET("campaigns/:id", ctrls.GetCampaign)
 	router.POST("campaigns", ctrls.BookCampaign)
 	router.DELETE("campaigns/:id", ctrls.DeleteCampaign)
+	router.PATCH("campaigns/:id", ctrls.UpdateCampaign)
 }

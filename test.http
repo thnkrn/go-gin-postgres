@@ -10,6 +10,10 @@ GET http://localhost:3000/api/campaigns
 Authorization: Bearer {{token}}
 ###
 
+GET http://localhost:3000/api/campaigns/14
+Authorization: Bearer {{token}}
+###
+
 POST http://localhost:3000/api/campaigns
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -22,4 +26,14 @@ Content-Type: application/json
 
 DELETE http://localhost:3000/api/campaigns/13
 Authorization: Bearer {{token}}
+###
+
+PATCH http://localhost:3000/api/campaigns/14
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "campaignName": "Test Campaign patch",
+  "date": "11/1/2022"
+}
 ###
