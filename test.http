@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDMwODIyMzJ9.QA_VlZjkiWwSI3Wcfwi-o8X1Z6Dh-wZmqrOjjec9Eik
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDMzNDIzMDF9.DIxSZDMPbj8YLk5Cj8wC7WztRzIdOL9sJVsbuhelFOY
 
 GET http://localhost:3000/
 ###
@@ -7,5 +7,19 @@ POST http://localhost:3000/login
 ###
 
 GET http://localhost:3000/api/campaigns
+Authorization: Bearer {{token}}
+###
+
+POST http://localhost:3000/api/campaigns
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "campaignName": "Test Campaign 1",
+  "date": "11/1/2022"
+}
+###
+
+DELETE http://localhost:3000/api/campaigns/11
 Authorization: Bearer {{token}}
 ###

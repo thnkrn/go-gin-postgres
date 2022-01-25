@@ -53,7 +53,7 @@ func LoginHandler(c *gin.Context) {
 	// Create token
 	// token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwt.StandardClaims{
-		ExpiresAt: time.Now().Add(5 * time.Minute).Unix(),
+		ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
 	})
 
 	ss, err := token.SignedString([]byte("secret"))

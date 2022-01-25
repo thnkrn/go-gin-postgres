@@ -10,4 +10,6 @@ func SetCollectionRoutes(router *gin.RouterGroup, db *gorm.DB) {
 	ctrls := controllers.DBController{Database: db}
 
 	router.GET("campaigns", ctrls.GetCampaigns)
+	router.POST("campaigns", ctrls.BookCampaign)
+	router.DELETE("campaigns/:id", ctrls.DeleteCampaign)
 }
