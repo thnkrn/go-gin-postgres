@@ -12,12 +12,11 @@ import (
 
 func main() {
 	router := gin.New()
+	router.Use(gin.Logger())
 
 	// Status Response
 	router.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "HELLO WORLD",
-		})
+		c.String(200, "ping pong")
 	})
 
 	// Request JWT

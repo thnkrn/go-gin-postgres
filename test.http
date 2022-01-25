@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDMwMTIwODJ9.KVa1p-SuDLo8ALPenn2fMIyRUeqUs-d3wos6yQthc1g
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDMwODIyMzJ9.QA_VlZjkiWwSI3Wcfwi-o8X1Z6Dh-wZmqrOjjec9Eik
 
 GET http://localhost:3000/
 ###
