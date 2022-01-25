@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 
 	db "github.com/thnkrn/go-gin-postgres/config"
@@ -28,7 +26,6 @@ func main() {
 	api := router.Group("/api", auth.AuthorizationMiddleware)
 	routers.SetCollectionRoutes(api, database)
 
-	fmt.Println("Server Running on Port: ", 3000)
 	// http.ListenAndServe(":3000", router)
 	router.Run(":3000")
 }
