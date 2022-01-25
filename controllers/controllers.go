@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	models "github.com/thnkrn/go-gin-postgres/models"
@@ -24,17 +25,34 @@ func (db *DBController) BookCampaign(c *gin.Context) {
 
 	if err := c.BindJSON(&campaign); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
 	}
 
 	if result := db.Database.Create(&campaign); result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error})
+		return
 	}
 
 	c.JSON(http.StatusCreated, &campaign)
 }
 
 func (db *DBController) DeleteCampaign(c *gin.Context) {
-	id := c.Param("id")
+	paramsId := c.Param("id")
+	id, err := strconv.Atoi(paramsId)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "cannot parse id",
+		})
+		return
+	}
+
+	if isValid := db.Database.First(&models.Campaigns{}, id); isValid.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Campaign is not booking yet",
+		})
+		return
+	}
 
 	if result := db.Database.Delete(&models.Campaigns{}, id); result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

@@ -20,6 +20,6 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/api/campaigns/11
+DELETE http://localhost:3000/api/campaigns/13
 Authorization: Bearer {{token}}
 ###
