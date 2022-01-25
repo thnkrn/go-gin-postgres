@@ -24,7 +24,7 @@ func main() {
 
 	// Authorization
 	api := router.Group("/api", auth.AuthorizationMiddleware)
-	routers.SetCollectionRoutes(api, database)
+	routers.SetCampaignsRoutes(api, database)
 
 	// http.ListenAndServe(":3000", router)
 	router.Run(":3000")

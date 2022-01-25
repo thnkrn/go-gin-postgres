@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SetCollectionRoutes(router *gin.RouterGroup, db *gorm.DB) {
+func SetCampaignsRoutes(router *gin.RouterGroup, db *gorm.DB) {
 	ctrls := controllers.DBController{Database: db}
 
 	router.GET("campaigns", ctrls.GetCampaigns)
