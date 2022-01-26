@@ -21,7 +21,7 @@ Run project
 
 ## Available Endpoint
 
-In the project directory, you can run:
+In the project directory, you can call:
 
 ### `GET /`
 
