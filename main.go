@@ -22,10 +22,11 @@ func main() {
 
 	database := db.Connect()
 
+	campaignAPI := InitCampaignAPI(database)
+
 	// Authorization
 	api := router.Group("/api", auth.AuthorizationMiddleware)
-	routers.SetCampaignsRoutes(api, database)
+	routers.SetCampaignsRoutes(api, campaignAPI)
 
-	// http.ListenAndServe(":3000", router)
 	router.Run(":3000")
 }
