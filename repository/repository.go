@@ -10,7 +10,7 @@ type CampaignRepository struct {
 	DB *gorm.DB
 }
 
-func ProvideCampaignRepostiory(DB *gorm.DB) CampaignRepository {
+func ProvideCampaignRepository(DB *gorm.DB) CampaignRepository {
 	return CampaignRepository{DB: DB}
 }
 

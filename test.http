@@ -10,7 +10,7 @@ GET http://localhost:3000/api/campaigns
 Authorization: Bearer {{token}}
 ###
 
-GET http://localhost:3000/api/campaigns/20
+GET http://localhost:3000/api/campaigns/21
 Authorization: Bearer {{token}}
 ###
 
@@ -24,11 +24,11 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/api/campaigns/19
+DELETE http://localhost:3000/api/campaigns/21
 Authorization: Bearer {{token}}
 ###
 
-PUT http://localhost:3000/api/campaigns/21
+PUT http://localhost:3000/api/campaigns/23
 Authorization: Bearer {{token}}
 Content-Type: application/json
 

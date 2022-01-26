@@ -12,7 +12,7 @@ import (
 )
 
 func InitCampaignAPI(db *gorm.DB) controllers.CampaignAPI {
-	wire.Build(repository.ProvideCampaignRepostiory, services.ProvideCampaignService, controllers.ProvideCampaignAPI)
+	wire.Build(repository.ProvideCampaignRepository, services.ProvideCampaignService, controllers.ProvideCampaignAPI)
 
 	return controllers.CampaignAPI{}
 }

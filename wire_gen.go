@@ -16,7 +16,7 @@ import (
 // Injectors from wire.go:
 
 func InitCampaignAPI(db *gorm.DB) controllers.CampaignAPI {
-	campaignRepository := repository.ProvideCampaignRepostiory(db)
+	campaignRepository := repository.ProvideCampaignRepository(db)
 	campaignService := services.ProvideCampaignService(campaignRepository)
 	campaignAPI := controllers.ProvideCampaignAPI(campaignService)
 	return campaignAPI
