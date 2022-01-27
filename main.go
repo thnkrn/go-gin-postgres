@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
-	db "github.com/thnkrn/go-gin-postgres/config"
+	config "github.com/thnkrn/go-gin-postgres/config"
 	auth "github.com/thnkrn/go-gin-postgres/middleware"
 	routers "github.com/thnkrn/go-gin-postgres/routers"
 )
@@ -20,7 +20,7 @@ func main() {
 	// Request JWT
 	router.POST("/login", auth.LoginHandler)
 
-	database := db.Connect()
+	database := config.ConnectDatabase()
 
 	campaignAPI := InitCampaignAPI(database)
 
