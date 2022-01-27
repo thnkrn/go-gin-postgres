@@ -9,3 +9,6 @@ run:
 serve:
 	make build
 	make run
+
+watch:
+	fresh

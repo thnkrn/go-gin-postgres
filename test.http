@@ -10,7 +10,7 @@ GET http://localhost:3000/api/campaigns
 Authorization: Bearer {{token}}
 ###
 
-GET http://localhost:3000/api/campaigns/21
+GET http://localhost:3000/api/campaigns/1
 Authorization: Bearer {{token}}
 ###
 
