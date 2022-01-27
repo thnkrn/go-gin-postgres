@@ -6,6 +6,7 @@
 - [JWT](github.com/golang-jwt/jwt) A go (or 'golang' for search engine friendliness) implementation of JSON Web Tokens.
 - [GORM](https://gorm.io/index.html) with [PostgresSQL](https://gorm.io/docs/connecting_to_the_database.html#PostgreSQL)The fantastic ORM library for Golang aims to be developer friendly.
 - [WIRE](https://github.com/google/wire) is a code generation tool that automates connecting components using dependency injection.
+- [fresh](https://github.com/gravityblast/fresh) is a command line tool that builds and (re)starts your web application everytime you save a Go or template file.
 
 ## Available Scripts
 
@@ -22,6 +23,10 @@ Run an execute file
 ### `make serve`
 
 Generate and run application
+
+### `make watch`
+
+Run and debug application with live reloading
 
 ## Available Endpoint
 
