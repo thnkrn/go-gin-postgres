@@ -6,6 +6,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	dto "github.com/thnkrn/go-gin-postgres/dto"
+	mapper "github.com/thnkrn/go-gin-postgres/mapper"
 	models "github.com/thnkrn/go-gin-postgres/models"
 	services "github.com/thnkrn/go-gin-postgres/services"
 )
@@ -21,7 +23,7 @@ func ProvideCampaignAPI(p services.CampaignService) CampaignAPI {
 func (p *CampaignAPI) FindAll(c *gin.Context) {
 	campaigns := p.CampaignService.FindAll()
 
-	c.JSON(http.StatusOK, &campaigns)
+	c.JSON(http.StatusOK, mapper.ToCampaignDTOs(campaigns))
 }
 
 func (p *CampaignAPI) FindByID(c *gin.Context) {
@@ -38,7 +40,7 @@ func (p *CampaignAPI) FindByID(c *gin.Context) {
 	campaign := p.CampaignService.FindByID(uint(id))
 
 	if int(campaign.ID) == id {
-		c.JSON(http.StatusOK, &campaign)
+		c.JSON(http.StatusOK, mapper.ToCampaignDTO(campaign))
 		return
 	}
 
@@ -46,16 +48,16 @@ func (p *CampaignAPI) FindByID(c *gin.Context) {
 }
 
 func (p *CampaignAPI) Create(c *gin.Context) {
-	var campaign models.Campaigns
+	var campaignDTO dto.CampaignDTO
 
-	if err := c.BindJSON(&campaign); err != nil {
+	if err := c.BindJSON(&campaignDTO); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
 
-	p.CampaignService.Save(campaign)
+	createdCampaign := p.CampaignService.Save(mapper.ToCampaign(campaignDTO))
 
-	c.JSON(http.StatusOK, &campaign)
+	c.JSON(http.StatusOK, mapper.ToCampaignDTO(createdCampaign))
 }
 
 func (p *CampaignAPI) Delete(c *gin.Context) {
@@ -84,8 +86,8 @@ func (p *CampaignAPI) Delete(c *gin.Context) {
 }
 
 func (p *CampaignAPI) Update(c *gin.Context) {
-	var campaign models.Campaigns
-	err := c.BindJSON(&campaign)
+	var campaignDTO dto.CampaignDTO
+	err := c.BindJSON(&campaignDTO)
 
 	if err != nil {
 		log.Fatalln(err)
@@ -103,20 +105,20 @@ func (p *CampaignAPI) Update(c *gin.Context) {
 		return
 	}
 
-	findCampaign := p.CampaignService.FindByID(uint(id))
+	campaign := p.CampaignService.FindByID(uint(id))
 
-	if findCampaign == (models.Campaigns{}) {
+	if campaign == (models.Campaigns{}) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Campaign is not booking yet",
 		})
 		return
 	}
 
-	findCampaign.CampaignName = campaign.CampaignName
-	findCampaign.Date = campaign.Date
-	p.CampaignService.Save(findCampaign)
+	campaign.CampaignName = campaignDTO.CampaignName
+	campaign.Date = campaignDTO.Date
+	p.CampaignService.Save(campaign)
 
-	c.JSON(http.StatusOK, findCampaign)
+	c.JSON(http.StatusOK, campaign)
 }
 
 // type DBController struct {
