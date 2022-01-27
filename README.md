@@ -11,13 +11,17 @@
 
 In the project directory, you can run:
 
-### `go build`
+### `make build`
 
 Generate an execute file
 
-### `./go-gin-postgres`
+### `make run`
 
-Run project
+Run an execute file
+
+### `make serve`
+
+Generate and run application
 
 ## Available Endpoint
 
